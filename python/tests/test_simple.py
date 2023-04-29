@@ -19,13 +19,9 @@ def test_json_serialize_string() -> None:
     )
 
     logging.debug("event = %s", event)
-
     event_json = conversion.to_json(event)
-
     logging.debug("event_json = %s", event_json)
-
     parsed = json.loads(event_json)
-
     logging.debug("parsed['data'] = %s", parsed["data"])
     assert parsed["data"] == '{"Hello": "there"}'
 
@@ -42,11 +38,8 @@ def test_json_serialize_bytes() -> None:
     )
 
     logging.debug("event = %s", event)
-
     event_json = conversion.to_json(event)
-
     logging.debug("event_json = %s", event_json)
-
     parsed = json.loads(event_json)
     logging.debug("parsed['data_base64'] = %s", parsed["data_base64"])
     assert parsed["data_base64"] == base64.b64encode(b'{"Hello": "there"}').decode()
@@ -64,11 +57,8 @@ def test_json_serialize_dict() -> None:
     )
 
     logging.debug("event = %s", event)
-
     event_json = conversion.to_json(event)
-
     logging.debug("event_json = %s", event_json)
-
     parsed = json.loads(event_json)
     logging.debug("parsed['data'] = %s", parsed["data"])
     assert parsed["data"] == {"Hello": "there"}
