@@ -1,0 +1,51 @@
+- data: !!binary |-
+    eyJhIjoxLCJiIjoyfQ==
+  dataString: "{\"a\":1,\"b\":2}"
+  dataContentType: "application/json"
+  options:
+    forceDataBase64Serialization: false
+    forceStringSerialization: false
+    forceExtensionNameLowerCaseDeserialization: false
+    forceIgnoreInvalidExtensionNameDeserialization: false
+  jsonOutput:
+    specversion: "1.0"
+    id: "00000000-0000-0000-0000-000000000000"
+    source: "http://example.com"
+    type: "example.event.v0"
+    datacontenttype: "application/json"
+    data:
+      a: 1
+      b: 2
+- data: !!binary |-
+    eyJhIjoxLCJiIjoyfQ==
+  dataString: "{\"a\":1,\"b\":2}"
+  dataContentType: null
+  options:
+    forceDataBase64Serialization: false
+    forceStringSerialization: false
+    forceExtensionNameLowerCaseDeserialization: false
+    forceIgnoreInvalidExtensionNameDeserialization: false
+  jsonOutput:
+    specversion: "1.0"
+    id: "00000000-0000-0000-0000-000000000000"
+    source: "http://example.com"
+    type: "example.event.v0"
+    data:
+      a: 1
+      b: 2
+- data: !!binary |-
+    eyJhIjoxLCJiIjoyfQ==
+  dataString: "{\"a\":1,\"b\":2}"
+  dataContentType: "text/plain"
+  options:
+    forceDataBase64Serialization: false
+    forceStringSerialization: true
+    forceExtensionNameLowerCaseDeserialization: false
+    forceIgnoreInvalidExtensionNameDeserialization: false
+  jsonOutput:
+    specversion: "1.0"
+    id: "00000000-0000-0000-0000-000000000000"
+    source: "http://example.com"
+    type: "example.event.v0"
+    datacontenttype: "text/plain"
+    data: "{\"a\":1,\"b\":2}"

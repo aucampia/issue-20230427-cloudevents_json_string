@@ -24,10 +24,13 @@ dependencies {
   // This dependency is used by the application.
   implementation("com.google.guava:guava:31.1-jre")
   implementation(platform("io.cloudevents:cloudevents-bom:2.4.2"))
+  implementation(platform("com.fasterxml.jackson:jackson-bom:2.15.0"))
   implementation("io.cloudevents:cloudevents-protobuf")
   implementation("io.cloudevents:cloudevents-core")
   implementation("io.cloudevents:cloudevents-json-jackson")
   implementation("io.cloudevents:cloudevents-api")
+  implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
+  implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
