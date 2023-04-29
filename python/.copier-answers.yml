@@ -1,0 +1,18 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 9f952a6
+_src_path: /home/iwana/sw/d/github.com/aucampia/copier-python/
+build_tool: poe
+cli_name: aucampia-issue-cejsonstring-cli
+git_commit: false
+git_init: false
+project_name: aucampia-issue-cejsonstring
+project_short_description: aucampia-issue-cejsonstring
+project_url: https://example.com/project
+python_package_fqname: aucampia.issue.cejsonstring
+python_version: '3.9'
+sdpx_license_identifier: UNLICENSED
+use_oci_devtools: false
+use_poetry_dynamic_versioning: false
+variant: minimal
+version: 0.0.0
+

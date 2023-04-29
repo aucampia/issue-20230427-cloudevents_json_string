@@ -1,0 +1,130 @@
+# https://python-poetry.org/docs/pyproject/
+# https://www.python.org/dev/peps/pep-0621/
+[tool.poetry]
+name = "aucampia-issue-cejsonstring"
+version = "0.0.0"
+description = ""
+authors = []
+license = "UNLICENSED"
+readme = "README.md"
+packages = [
+    {include = "*", from = "src"},
+]
+
+[tool.poetry.scripts]
+"aucampia-issue-cejsonstring-cli" = "aucampia.issue.cejsonstring.cli:main"
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pydantic = "^1.10.4"
+PyYAML = "^6.0"
+#
+#
+cloudevents = {extras = ["pydantic"], version = "^1.9.0"}
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+codespell = "^2.2.2"
+flake8 = "^5.0.4"
+flake8-bugbear = "^23.1.20"
+flake8-isort = "^6.0.0"
+flake8-bandit = "^4.1.1"
+isort = "^5.0.0"
+mypy = "^1.0.0"
+pep8-naming = "^0.13.3"
+pycln = "^2.1.3"
+pytest = "^7.2.1"
+pytest-cov = "^4.0.0"
+types-PyYAML = "^6.0.12.5"
+typing-extensions = "^4.4.0"
+pip-audit = "^2.4.14"
+#
+poethepoet = "^0.18.1"
+#
+
+[tool.coverage.report]
+# https://coverage.readthedocs.io/en/coverage-5.0/config.html
+show_missing = true
+
+[tool.isort]
+# https://pycqa.github.io/isort/docs/configuration/config_files.html
+profile = "black"
+src_paths = ["src", "tests"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# addopts = ["--cov-config=pyproject.toml", "--cov=src"]
+# https://docs.pytest.org/en/stable/customize.html
+# https://docs.pytest.org/en/stable/reference.html#configuration-options
+log_format = "%(asctime)s %(process)d %(thread)d %(levelno)03d:%(levelname)-8s %(name)-12s %(module)s:%(lineno)s:%(funcName)s %(message)s"
+log_date_format = "%Y-%m-%dT%H:%M:%S"
+log_cli_format = "%(asctime)s %(process)d %(thread)d %(levelno)03d:%(levelname)-8s %(name)-12s %(module)s:%(lineno)s:%(funcName)s %(message)s"
+log_cli_date_format = "%Y-%m-%dT%H:%M:%S"
+
+[tool.mypy]
+# https://mypy.readthedocs.io/en/stable/config_file.html
+files = "src,tests"
+mypy_path = "src"
+python_version = "3.9"
+strict = true
+warn_unreachable = true
+warn_unused_configs = true
+explicit_package_bases = true
+namespace_packages = true
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
+
+#
+[tool.poe.env]
+PYTHON_SOURCE="src tests"
+
+[tool.poe.tasks.validate-static]
+help = "perform static validation"
+sequence = [
+    { cmd = "mypy --show-error-context --show-error-codes ${PYTHON_SOURCE}" },
+    { cmd = "isort --check --diff ${PYTHON_SOURCE}" },
+    { cmd = "black --check --diff ${PYTHON_SOURCE}" },
+    { cmd = "flake8 ${PYTHON_SOURCE}" },
+]
+
+[tool.poe.tasks.test]
+help = "run tests"
+cmd = "pytest"
+
+[tool.poe.tasks.validate-fix]
+help = "fix auto fixable validation errors"
+sequence = [
+    { cmd = "pycln --config=pyproject.toml ${PYTHON_SOURCE}" },
+    { cmd = "isort ${PYTHON_SOURCE}" },
+    { cmd = "black ${PYTHON_SOURCE}" },
+]
+
+
+[tool.poe.tasks.validate]
+help = "validate everything"
+sequence = [
+    { ref = "validate-static" },
+    { ref = "test" },
+]
+
+[tool.poe.tasks.fix-and-validate]
+help = "fix things then validate"
+sequence = [
+    { ref = "validate-fix" },
+    { ref = "validate" },
+]
+#
+
+#
+
+[build-system]
+#
+requires = ["setuptools","poetry-core>=1.0.0"]
+#
+build-backend = "poetry.core.masonry.api"
